@@ -66,8 +66,14 @@ p {
   padding-top: 9px;
   font-weight: bold;
   &:hover {
-    color: white;
+    color: #00C080;
     text-decoration: none;
+  }
+}
+
+.nav.navbar-nav > li > a {
+  &:hover {
+    color: #00C080;
   }
 }
 
