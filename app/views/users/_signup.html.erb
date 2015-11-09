@@ -1,0 +1,39 @@
+<div class="login_form">
+  <h1><strong>Create a Giapponese Account<strong></h1>
+  <div>
+    <%= form_for(@user) do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+          <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <%= f.label "Full name", class: 'control-label' %><br>
+        <%= f.text_field :fullname, class: 'form-control', placeholder: "full name" %><br>
+      </div>
+      <div class="form-group">
+        <%= f.label "Email", class: 'control-label' %><br>
+        <%= f.text_field :email, class: 'form-control', placeholder: "email" %><br>
+      </div>
+      <div class="form-group">
+        <%= f.label :password, class: 'control-label' %><br>
+        <%= f.password_field :password, class: 'form-control', placeholder: "password" %>
+      </div>
+      <div class="action">
+        <div class="register inline">
+          <%= f.submit "Create New Account", class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+    <p class="forgot-password blur">Forgot your password? <%= link_to "Reset it" %></p>
+    <p class="register blur">You already have account? <%= link_to "Login", home_path %></p>
+    <div>
+
+    </div>
+  </div>
+</div>

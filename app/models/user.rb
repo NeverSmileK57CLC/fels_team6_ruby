@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
 	has_many :lessons
 
-	before_save: {self.email = email.downcase}, :encrypt_password
+	before_save {self.email = email.downcase}
+	before_save :encrypt_password
 	validates :fullname, presence: true, length: {maximum: 50}
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: {maximum: 255},

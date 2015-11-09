@@ -1,0 +1,64 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.login_form {
+	font-size: 20px;
+	margin: 0 auto;
+	max-width: 500px;
+	padding-top: 50px;
+}
+.form-group {
+	font-weight: 300;
+}
+.form-control {
+	background-color: #edeff0;
+	padding: 0.5em !important;
+	max-width: 400px;
+	height: auto !important;
+	font-size: 20px !important;
+}
+form {
+	margin-top: 30px;
+}
+.forgot-password {
+	margin-top: 30px;
+}
+.blur {
+	font-weight: 300;
+	color: #999;
+}
+label.control-label {
+	color: #4d4d4d;
+	font-size: 21px;
+	font-weight: 300;
+}
+input[type="submit"] {
+	font-size: 21px;
+	border-radius: 2px;
+}
+.inline {
+	display: inline-block;
+}
+.action {
+	padding-top: 15px;
+	.login {
+		padding-left: 33px;
+	}
+}
+div.action .login a button {
+	padding: 6px 12px;
+	font-size: 21px;
+	font-weight: normal;
+	background-color: #E9E9E9;
+	color: #707070;
+    border: 2px solid #E9E9E9;
+    border-top: 0px solid transparent;
+}
+#error_explanation {
+	font-weight: normal;
+	border: 1px solid red;
+	h2 {
+		color: red;
+	}
+	margin-bottom: 20px;
+}
