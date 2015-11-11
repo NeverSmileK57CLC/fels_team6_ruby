@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107164152) do
+ActiveRecord::Schema.define(version: 20151107140459) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -28,18 +31,20 @@ ActiveRecord::Schema.define(version: 20151107164152) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "lessons", ["category_id"], name: "index_lessons_on_category_id"
-  add_index "lessons", ["user_id"], name: "index_lessons_on_user_id"
+  add_index "lessons", ["category_id"], name: "index_lessons_on_category_id", using: :btree
+  add_index "lessons", ["user_id"], name: "index_lessons_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "fullname"
     t.string   "email"
-    t.string   "encrypted_password"
+    t.string   "ecrypted_password"
     t.string   "salt"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.string   "password"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   create_table "word_answers", force: :cascade do |t|
     t.string   "content"
@@ -49,7 +54,7 @@ ActiveRecord::Schema.define(version: 20151107164152) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "word_answers", ["word_id"], name: "index_word_answers_on_word_id"
+  add_index "word_answers", ["word_id"], name: "index_word_answers_on_word_id", using: :btree
 
   create_table "word_lessons", force: :cascade do |t|
     t.integer  "word_id"
@@ -58,8 +63,8 @@ ActiveRecord::Schema.define(version: 20151107164152) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "word_lessons", ["lesson_id"], name: "index_word_lessons_on_lesson_id"
-  add_index "word_lessons", ["word_id"], name: "index_word_lessons_on_word_id"
+  add_index "word_lessons", ["lesson_id"], name: "index_word_lessons_on_lesson_id", using: :btree
+  add_index "word_lessons", ["word_id"], name: "index_word_lessons_on_word_id", using: :btree
 
   create_table "words", force: :cascade do |t|
     t.string   "content"
@@ -68,6 +73,6 @@ ActiveRecord::Schema.define(version: 20151107164152) do
     t.datetime "updated_at",  null: false
   end
 
-  add_index "words", ["category_id"], name: "index_words_on_category_id"
+  add_index "words", ["category_id"], name: "index_words_on_category_id", using: :btree
 
 end
