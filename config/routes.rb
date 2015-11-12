@@ -1,11 +1,24 @@
 Rails.application.routes.draw do
+  get 'signin' => 'sessions#new'
+  post 'signin' => 'sessions#create'
+  delete 'logout' => 'sessions#destroy'
+
+  get 'sessions/new'
+  get 'api/users'
+  get 'api/lessons'
+  get 'api/categories'
+  get 'api/words'
+  get 'api/wordanswers'
+  get 'api/lessonwords'
+  get 'api/activities'
+
   root 'static_pages#home'
 
   get 'home' => 'static_pages#home'
   get 'help' => 'static_pages#help'
   get 'contact' => 'static_pages#contact'
 
-  get 'signup' => 'users#new'
+  get 'register' => 'users#new'
 
   resources :users
 
