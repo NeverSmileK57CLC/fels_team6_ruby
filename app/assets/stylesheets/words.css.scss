@@ -1,0 +1,17 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+.filter {
+	.filter-category {
+		display: inline;
+    	float: left;
+	}
+	.filter-learned {
+		display: inline;
+	    padding-left: 64px;
+	    padding-top: 9px;
+	    float: left;
+	    font-size: 18px;
+	}
+}

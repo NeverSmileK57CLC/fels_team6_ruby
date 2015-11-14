@@ -1,21 +1,18 @@
 Rails.application.routes.draw do
+  get 'categories' => 'categories#index'
+  get 'categories/index'
+
+  get 'words' => 'words#index'
+  get 'words/index'
+
   get 'admin' => 'admin#index'
   get 'admin/index'
-  get 'admin/word'
   get 'admin/category'
 
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-
   get 'sessions/new'
-  get 'api/users'
-  get 'api/lessons'
-  get 'api/categories'
-  get 'api/words'
-  get 'api/wordanswers'
-  get 'api/lessonwords'
-  get 'api/activities'
 
   root 'static_pages#home'
 
@@ -26,6 +23,13 @@ Rails.application.routes.draw do
   get 'register' => 'users#new'
 
   resources :users
+
+  namespace :admin do
+    # Directs /admin/words/* to Admin::WordsController
+    # (app/controllers/admin/words_controller.rb)
+    resources :words
+    resources :users
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

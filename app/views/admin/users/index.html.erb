@@ -1,0 +1,34 @@
+<div>
+	<%= render 'admin/head' %>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Full name</th>
+				<th>Email</th>
+				<th>Admin</th>
+				<th>Opeations</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @users.each do |user| %>
+			<tr>
+				<td><%= user.id %></td>
+				<td><%= user.fullname %></td>
+				<td><%= user.email %></td>
+				<td><%= user.role %></td>
+				<td>
+					<%= link_to(user) do %>
+						<i class="operations fa fa-eye fa-2x"></i>
+					<% end %>
+					<%= link_to(edit_user_path(user)) do %>
+						<i class="operations fa fa-pencil-square-o fa-2x"></i>
+					<% end %>
+					<%= link_to(user, method: :delete, data: {confirm: "Are you sure?"}) do %>
+						<i class="operations fa fa-trash fa-2x"></i></a>
+					<% end %>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

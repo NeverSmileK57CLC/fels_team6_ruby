@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 	has_many :lessons
 
 	before_save {self.email = email.downcase}
-	before_save :encrypt_password
+	before_save :encrypt_password, :create_role
 	validates :fullname, presence: true, length: {maximum: 50}
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: {maximum: 255},
@@ -45,5 +45,9 @@ class User < ActiveRecord::Base
 
 		def secure_hash(string)
 			Digest::SHA256.hexdigest(string)
+		end
+
+		def create_role
+			self.role = "User" if self.role == nil
 		end
 end
