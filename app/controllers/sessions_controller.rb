@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
   	user = User.authenticate(params[:session][:email], params[:session][:password])
   	if user.nil?
   		@title = "Sign in"
-  		redirect_to signin_path, notice: "Invalid email/password combination."
+  		redirect_to signin_path, alert: "Invalid email/password combination."
   	else
   		sign_in user
   		redirect_to user_path(user), notice: "Sign in successfull."

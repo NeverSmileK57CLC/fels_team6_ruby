@@ -4,11 +4,15 @@
 	<h1>Loi</h1>
 <% end %>
 
-<%= form_tag(words_path, method: :get) do %>
+<%= form_tag(words_path, method: :get, class: "filter") do %>
 	<div class="filter-category">
 	<select class="form-control" name="category_id">
 		<% @categories.each do |category| %>
-			<option value="<%= category.id %>"><%= category.name %></option>
+			<option value="<%= category.id %>"
+			<% if category.id == @filter[:category_id].to_i %>
+				selected
+			<% end %>
+			><%= category.name %></option>
 		<% end %>
 	</select>
 	</div>
