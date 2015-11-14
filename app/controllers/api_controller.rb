@@ -34,6 +34,6 @@ class ApiController < ApplicationController
 
   def activities
     @activities = Activity.all
-    redner json: @activities
+    render json: @activities
   end
 end

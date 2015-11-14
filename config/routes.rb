@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'admin' => 'admin#index'
+  get 'admin/index'
+  get 'admin/word'
+  get 'admin/category'
+
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'

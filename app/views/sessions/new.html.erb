@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
-	<h1>Login to Giapponese</h1>
+	<h1><strong>Login to Giapponese</strong></h1>
 
 		<%= form_for(:session, :url => signin_path) do |f| %>
 			<div class="field form-group">
@@ -18,7 +18,7 @@
 				</div>
 			</div>
 			<div class="action">
-				<%= f.submit "Sign in", class: 'btn btn-success' %>
+				<%= f.submit "Sign in", class: 'btn btn-primary' %>
 			</div>
 		<% end %>
 		<br>

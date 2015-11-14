@@ -11,5 +11,16 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require font-awesome
  *= require_self
  */
+ 
+ .nav.navbar-nav {
+ 	color: blue;
+ 	li {
+ 		font-size: 18px;
+ 		a:hover {
+ 			background-color: black;
+ 		}
+ 	}
+ }
