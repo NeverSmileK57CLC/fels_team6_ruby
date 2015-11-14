@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   get 'sessions/new'
 
-  root 'static_pages#home'
+  root 'sessions#new'
 
   get 'home' => 'static_pages#home'
   get 'help' => 'static_pages#help'
