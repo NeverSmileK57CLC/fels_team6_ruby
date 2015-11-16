@@ -188,6 +188,14 @@ WordAnswer.create(word: word, content: "answer2", correct: true)
 WordAnswer.create(word: word, content: "answer3", correct: false)
 WordAnswer.create(word: word, content: "answer4", correct: true)
 
+30.times do |n|
+	content = "Word #{1000+n}"
+	word = Word.create(category: category, content: content)
+	WordAnswer.create(word: word, content: "answer1", correct: false)
+	WordAnswer.create(word: word, content: "answer2", correct: true)
+	WordAnswer.create(word: word, content: "answer3", correct: false)
+	WordAnswer.create(word: word, content: "answer4", correct: true)
+end
 
 #Create lesson
 lesson = Lesson.create(result: 10, user_id: 1, category_id: 1)
