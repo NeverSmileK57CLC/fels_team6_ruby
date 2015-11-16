@@ -14,4 +14,15 @@
 	    float: left;
 	    font-size: 18px;
 	}
+	.actions {
+		float: left;
+	}
+	input[type="submit"] {
+		padding: 4px 20px 4px 20px;
+    	margin: 0px 20px 0 50px;
+    	border-radius: 4px;
+	}
+}
+.btn.pdf {
+	font-size: 18px;
 }

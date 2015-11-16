@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'lessons/index'
+
+  get 'lessons/new'
+
   get 'categories' => 'categories#index'
   get 'categories/index'
 

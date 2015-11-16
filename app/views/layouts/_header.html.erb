@@ -1,11 +1,13 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <a href="#" id="logo"><i class="fa fa-mortar-board fa-custom app-symbol"></i>giapponese</a>
-    <!-- <i class="fa fa-mortar-board fa-3x app-symbol"></i>
-    <%= link_to "giapponese", '#', id: "logo" %> -->
+    <% home_link = signin_path %>
+    <% home_link = home_path if signed_in? %>
+    <%= link_to home_link, id: "logo" do %>
+      <i class="fa fa-mortar-board fa-custom app-symbol"></i>giapponese
+    <% end %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",   '#' %></li>
+        <li><%= link_to "Home", home_link %></li>
         <li><%= link_to "Help",   '#' %></li>
         <% if !signed_in? %>
           <li><%= link_to "Sign in", signin_path %></li>

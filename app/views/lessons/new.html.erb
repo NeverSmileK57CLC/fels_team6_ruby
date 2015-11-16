@@ -1,0 +1,11 @@
+<h1>Lessons#new</h1>
+<p>Find me in app/views/lessons/new.html.erb</p>
+<% @questions.each do |question| %>
+	<%= question.id %> | <%= question.content %> |
+	<% WordAnswer.all.where(word_id: question.id).each do |ans| %>
+		<%= ans.content %> |
+	<% end %>
+<% end %>
+Question:
+<% a = @questions.to_a %>
+<%= a[2].content %>

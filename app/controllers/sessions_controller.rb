@@ -5,13 +5,17 @@ class SessionsController < ApplicationController
 
   def create
   	user = User.authenticate(params[:session][:email], params[:session][:password])
-  	if user.nil?
-  		@title = "Sign in"
-  		redirect_to signin_path, alert: "Invalid email/password combination."
-  	else
-  		sign_in user
-  		redirect_to user_path(user), notice: "Sign in successfull."
-  	end
+    respond_to do |format|
+    	if user.nil?
+    		@title = "Sign in"
+    		format.html {redirect_to signin_path, alert: "Invalid email/password combination."}
+        format.json {render json: {user: user}, status: "success"}
+    	else
+    		sign_in user
+    		format.html {redirect_to user_path(user), notice: "Sign in successfull."}
+        format.json {render json: {message: user.errors.full_message}, status: "fail"}
+    	end
+    end
   end
 
   def destroy
