@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     respond_to do |format|
-      format.json{render json: {users: @users.as_json}, status: :ok}
+      format.json{render json: {users: @users.as_json(except: :password)}, status: :ok}
     end
   end
 
