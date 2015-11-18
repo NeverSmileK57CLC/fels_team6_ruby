@@ -22,7 +22,9 @@ class UsersController < ApplicationController
 
     respond_to do |format|
     	if @user.save
-    		format.html {redirect_to user_path(@user)}
+        user = User.authenticate(@user.email, @user.password)
+        sign_in user
+    		format.html {redirect_to @user, notice: "Register successfully."}
         format.json {render json: {user: @user}, status: :created}
     	else
     		format.html {render 'new'}
