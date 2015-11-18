@@ -1,2 +1,30 @@
-<h1>Lessons#index</h1>
-<p>Find me in app/views/lessons/index.html.erb</p>
+<h1>List lessons</h1>
+
+<table class="table table-striped list-lesson">
+<thead>
+	<tr>
+		<th>ID</th>
+		<th>Category</th>
+		<th>Result</th>
+		<th>Action</th>
+	</tr>
+</thead>
+<% @lessons.each do |lesson| %>
+	<tr>
+		<td><%= lesson.id %></td>
+		<td><%= lesson.category.name %></td>
+		<td>
+			<% if !lesson.result.nil? %>
+				<%= lesson.result %>/<%= lesson.word_lessons.count %>
+			<% else %>
+				0/<%= lesson.word_lessons.count %>
+			<% end %>
+		</td>
+		<td>
+			<%= link_to lesson_path(lesson) do %>
+				<button class="btn btn-primary">Retake</button>
+			<% end %>
+		</td>
+	</tr>
+<% end %>
+</table>

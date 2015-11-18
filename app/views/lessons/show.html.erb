@@ -1,6 +1,3 @@
-
-Ngoc<%= @p %>Bach
-
 <% if @p.nil? %>
 <%= form_for(@lesson, url: lesson_path(@lesson), method: :patch) do |f| %>
 <% @count = 0 %>
@@ -25,7 +22,7 @@ Ngoc<%= @p %>Bach
 <% else %>
 <% true_answer = 0 %>
 
-<p><%= @lesson.category.name %> Result: <%= @lesson.result %></p>
+<p class="result-board"><%= @lesson.category.name %> Result: <%= @lesson.result %>/<%= @lesson.word_lessons.count %></p>
 <% @count = 0 %>
 <table class="table table-striped result-table">
 <tbody>
@@ -38,7 +35,7 @@ Ngoc<%= @p %>Bach
 		<% else %>
 			<td><i class="fa fa-times fa-2-5x wrong-answer"></i></td>
 		<% end %>
-		<td><%= w.word.content %>|<%=@p["wordanswer#{@count}"]%>|<%=w.word.word_answers.where(correct: 1).first.id%></td>
+		<td><%= w.word.content %></td>
 		<td><%= WordAnswer.where(id: @p["wordanswer#{@count}"]).first.content %></td>
 	<% else %>
 		<td><i class="fa fa-times fa-2-5x wrong-answer"></i></td>
@@ -49,4 +46,7 @@ Ngoc<%= @p %>Bach
 	<% end %>
 </tbody>
 </table>
+<%= link_to categories_path do %>
+	<button class="btn btn-primary">Back</button>
+<% end %>
 <% end %>
