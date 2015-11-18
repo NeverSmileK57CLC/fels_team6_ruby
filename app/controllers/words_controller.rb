@@ -34,9 +34,13 @@ class WordsController < ApplicationController
 
   	@categories = Category.all
 
+    word_answers = {}
+    @words.each do |word|
+      word_answers["#{word.id}"] = word.word_answers.where(correct: true).first.content
+    end
   	respond_to do |format|
   		format.html {}
-  		format.json {render json: {words: @words.as_json}, status: :ok}
+  		format.json {render json: {words: @words.as_json, answers: word_answers.as_json}, status: :ok}
   	end
   end
 end

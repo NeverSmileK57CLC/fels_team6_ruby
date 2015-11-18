@@ -1,3 +1,6 @@
+<% if !alert.nil? %>
+		<p id="alert"><%= alert %></p>
+	<% end %>
 <table class="table table-striped">
 <thead>
 	<tr>
@@ -13,8 +16,10 @@
 		<td><%= category.name %></td>
 		<td><%= category.description %></td>
 		<td>
-			<%= link_to lessons_new_path(:category_id => category.id), method: :get do %>
-				<button class="btn btn-primary">Start</button>
+			<%= form_for Lesson.new do |f| %>
+				<%= f.hidden_field :category_id, value: category.id %>
+				<%= f.hidden_field :user_id, value: current_user.id %>
+				<%= f.submit "Start", class: "btn btn-primary" %>
 			<% end %>
 		</td>
 	</tr>

@@ -2,3 +2,22 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+.each-question {
+	padding-top: 10px;
+    height: 133px;
+    font-size: 20px;
+    border-bottom: 1px solid black;
+}
+
+.true-answer {
+	color: #5cb85c;
+}
+.wrong-answer {
+	color: #d9534f;
+}
+.result-table {
+	font-size: 20px;
+}
+.fa-2-5x {
+	font-size: 2.5em !important;
+}

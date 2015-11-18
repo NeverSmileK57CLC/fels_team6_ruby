@@ -1,0 +1,52 @@
+
+Ngoc<%= @p %>Bach
+
+<% if @p.nil? %>
+<%= form_for(@lesson, url: lesson_path(@lesson), method: :patch) do |f| %>
+<% @count = 0 %>
+<% @wordlessons.each do |w| %>
+	<% @count += 1 %>
+	<div class="each-question">
+		<div class="col-md-3">
+		<%= Word.find(w.word_id).content %>
+		</div>
+		<div class="col-md-9">
+		<% @wordanswers = WordAnswer.where(word_id: w.word_id) %>
+		<% @wordanswers.each do |wa| %>
+			<input type="radio" name="wordanswer<%= @count %>" value="<%= wa.id %>"><%= wa.content %><br>
+		<% end %>
+		</div>
+	</div>
+<% end %>
+<div>
+	<%= f.submit "Submit", class: "btn btn-primary" %>
+</div>
+<% end %>
+<% else %>
+<% true_answer = 0 %>
+
+<p><%= @lesson.category.name %> Result: <%= @lesson.result %></p>
+<% @count = 0 %>
+<table class="table table-striped result-table">
+<tbody>
+	<% @wordlessons.each do |w| %>
+	<% @count += 1 %>
+	<tr>
+	<% if !@p["wordanswer#{@count}"].nil? %>
+		<% if w.answer == w.word.word_answers.where(correct: 1).first.content %>
+			<td><i class="fa fa-circle-o fa-2-5x true-answer"></i></td>
+		<% else %>
+			<td><i class="fa fa-times fa-2-5x wrong-answer"></i></td>
+		<% end %>
+		<td><%= w.word.content %>|<%=@p["wordanswer#{@count}"]%>|<%=w.word.word_answers.where(correct: 1).first.id%></td>
+		<td><%= WordAnswer.where(id: @p["wordanswer#{@count}"]).first.content %></td>
+	<% else %>
+		<td><i class="fa fa-times fa-2-5x wrong-answer"></i></td>
+		<td><%= w.word.content %></td>
+		<td>Not Answer</td>
+	<% end %>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+<% end %>
