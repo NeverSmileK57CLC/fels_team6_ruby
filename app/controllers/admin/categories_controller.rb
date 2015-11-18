@@ -1,15 +1,7 @@
-class Admin::WordsController < ApplicationController
+class Admin::CategoriesController < ApplicationController
 	before_action :check_admin
 	def index
-		@words = Word.all
-	end
-
-	def show
-		
-	end
-
-	def edit
-		
+		@categories = Category.all
 	end
 	private
 		def check_admin

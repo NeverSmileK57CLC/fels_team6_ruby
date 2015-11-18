@@ -1,9 +1,9 @@
 <%= form_tag(words_path, method: :get, class: "filter") do %>
 	<div class="filter-category">
-	<select class="form-control" name="category_id">
+	<select class="form-control" name="category_name">
 		<% @categories.each do |category| %>
-			<option value="<%= category.id %>"
-			<% if category.id == @filter[:category_id].to_i %>
+			<option value="<%= category.name %>"
+			<% if category.name == @filter[:category_name] %>
 				selected
 			<% end %>
 			><%= category.name %></option>

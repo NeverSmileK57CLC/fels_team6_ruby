@@ -9,10 +9,6 @@ Rails.application.routes.draw do
   get 'words' => 'words#index'
   get 'words/index'
 
-  get 'admin' => 'admin#index'
-  get 'admin/index'
-  get 'admin/category'
-
   get 'signin' => 'sessions#new'
   post 'signin' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
@@ -34,6 +30,7 @@ Rails.application.routes.draw do
     # (app/controllers/admin/words_controller.rb)
     resources :words
     resources :users
+    resources :categories
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

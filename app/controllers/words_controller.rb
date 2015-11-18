@@ -2,10 +2,11 @@ class WordsController < ApplicationController
   def index
   	@filter = params
     @filter[:learned] = '3' if @filter[:learned].nil?
-  	if !@filter[:category_id].nil?
-  		@words = Word.all.where(category_id: params[:category_id])
-  	else
+  	if @filter[:category_name].nil? or @filter[:category_name] == "All"
   		@words = Word.all
+  	else
+  		category_id = Category.find_by(name: params[:category_name]).id
+  		@words = Word.where(category_id: category_id)
   	end
 
     if signed_in?
