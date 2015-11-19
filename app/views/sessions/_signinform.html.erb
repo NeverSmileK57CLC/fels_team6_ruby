@@ -12,14 +12,14 @@
 			<div class="field form-group">
 				<%= f.label :email, class: 'control-label' %><br>
 				<div>
-					<%= f.text_field :email, class: 'form-control' %>
+					<%= f.text_field :email, class: 'form-control', required: true %>
 					<br>
 				</div>
 			</div>
 			<div class="field form-group">
 				<%= f.label :password, class: 'control-label' %><br>
 				<div>
-					<%= f.password_field :password, class: 'form-control' %>
+					<%= f.password_field :password, class: 'form-control', required: true %>
 				</div>
 			</div>
 			<div class="action">

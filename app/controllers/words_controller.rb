@@ -1,6 +1,8 @@
 class WordsController < ApplicationController
   def index
   	@filter = params
+
+    # Mặc định là All
     @filter[:learned] = '3' if @filter[:learned].nil?
   	if @filter[:category_name].nil? or @filter[:category_name] == "All"
   		@words = Word.all
@@ -8,29 +10,35 @@ class WordsController < ApplicationController
   		category_id = Category.find_by(name: params[:category_name]).id
   		@words = Word.where(category_id: category_id)
   	end
-
-    if signed_in?
-      lessons = current_user.lessons
+    # Nếu người dùng sign in thành công hoặc mobile gửi api lên server
+    if signed_in? or !params[:email].nil?
+      # Tìm lesson tùy vào việc sign in hay là request từ mobile
+      if signed_in?
+        lessons = current_user.lessons
+      else
+        user = User.find_by(email: params[:email])
+        lessons = user.lessons
+      end
+      # Lấy ra id của những từ đã học
+      learned_word = []
       if !lessons.nil?
-        learned_word = []
         lessons.each do |lesson|
           wl = WordLesson.where(lesson_id: lesson.id)
           wl.each do |f|
-            learned_word << f
+            learned_word << f.word_id
           end
         end
       end
-      learned_word_id = []
-      learned_word.each do |l|
-        learned_word_id << l.word_id
-      end
+      # learned_word_id = []
+      # learned_word.each do |l|
+      #   learned_word_id << l.word_id
+      # end
       if @filter[:learned] == '1'
-        @words = @words.where("id IN (?)", learned_word_id)
+        @words = @words.where("id IN (?)", learned_word)
       elsif @filter[:learned] == '2'
-        @words = @words.where("id NOT IN (?)", learned_word_id)
+        @words = @words.where("id NOT IN (?)", learned_word)
       end
     end
-    #if @filter[:learned] == '1'
 
 
   	@categories = Category.all

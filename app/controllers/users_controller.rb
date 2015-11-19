@@ -36,11 +36,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find_by(email: params[email])
+    @user = User.find_by(email: params[:user][:email])
     respond_to do |format|
       if @user.update(user_params)
         format.html {redirect_to user_path(@user), notice: "Update user successfully."}
-        format.json {render :show, status: :updated}
+        format.json {render json: {status: "updated"}}
       else
         format.html {render :edit}
         format.json {render json: {messages: @user.errors.full_messages}, status: :unprocessable_entity}
