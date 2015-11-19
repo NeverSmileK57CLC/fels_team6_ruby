@@ -1,5 +1,9 @@
 <div>
 	<%= render 'admin/head' %>
+	<p id="notice"><%= notice %></p>
+	<%= link_to new_admin_user_path do %>
+		<button class='btn btn-success'>New User</button>
+	<% end %>
 	<table class="table table-striped table-hover">
 		<thead>
 			<tr>

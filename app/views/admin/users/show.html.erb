@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+<% provide(:title, @user.fullname) %>
+<div class="row">
+	<aside class="col-md-4">
+		<section class="user_info">
+			<h1>
+				<%= gravatar_for @user %>
+				<%= @user.fullname %>
+			</h1>
+		</section>
+	</aside>
+	<aside class="col-md-8">
+		<ul class="list-group">
+			<li class="list-group-item"><%= @user.email %></li>
+			<li class="list-group-item"><%= @user.role</li>
+			<li class="list-group-item">Morbi leo risus</li>
+			<li class="list-group-item">Porta ac consectetur ac</li>
+			<li class="list-group-item">Vestibulum at eros</li>
+		</ul>
+	</aside>
+</div>

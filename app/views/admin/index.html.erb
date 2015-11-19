@@ -1,5 +1,9 @@
 <div>
 	<%= render 'head' %>
+	<p id="notice"><%= notice %></p>
+	<%= link_to new_admin_word_path do %>
+		<button class='btn btn-success'>New Word</button>
+	<% end %>
 	<table class="table table-striped">
 		<thead>
 			<tr>

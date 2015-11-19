@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :verify_authenticity_token
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :destroy]
 
   def index
     @users = User.all
@@ -37,6 +36,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find_by(email: params[email])
     respond_to do |format|
       if @user.update(user_params)
         format.html {redirect_to user_path(@user), notice: "Update user successfully."}
