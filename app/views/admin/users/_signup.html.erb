@@ -14,15 +14,15 @@
       <% end %>
       <div class="form-group">
         <%= f.label "Full name", class: 'control-label' %><br>
-        <%= f.text_field :fullname, class: 'form-control', placeholder: "full name" %><br>
+        <%= f.text_field :fullname, class: 'form-control', placeholder: "full name", required: true %><br>
       </div>
       <div class="form-group">
         <%= f.label "Email", class: 'control-label' %><br>
-        <%= f.text_field :email, class: 'form-control', placeholder: "email" %><br>
+        <%= f.text_field :email, class: 'form-control', placeholder: "email", required: true %><br>
       </div>
       <div class="form-group">
         <%= f.label :password, class: 'control-label' %><br>
-        <%= f.password_field :password, class: 'form-control', placeholder: "password" %>
+        <%= f.password_field :password, class: 'form-control', placeholder: "password", required: true %>
       </div>
       <div class="form-group">
         <%= f.label :role, class: 'control-label' %>

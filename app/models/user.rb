@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	has_many :lessons
+	has_many :lessons, dependent: :destroy
 
 	before_save {self.email = email.downcase}
 	before_save :encrypt_password, :create_role

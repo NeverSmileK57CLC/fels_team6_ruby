@@ -1,3 +1,4 @@
+<h1>List words</h1>
 <%= form_tag(words_path, method: :get, class: "filter") do %>
 	<div class="filter-category">
 	<select class="form-control" name="category_name">
@@ -33,7 +34,7 @@
 <% end %>
 <button class="btn btn-primary pdf">PDF</button>
 
-<table class="table table-striped">
+<table class="table table-striped word-table">
 <thead>
 	<tr>
 		<th>ID</th>

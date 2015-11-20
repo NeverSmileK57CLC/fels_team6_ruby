@@ -1,5 +1,6 @@
 class Admin::CategoriesController < ApplicationController
 	before_action :set_category, only: [:show, :edit, :update, :destroy]
+	before_action :check_login
 	before_action :check_admin
 	def index
 		@categories = Category.all
@@ -52,4 +53,10 @@ class Admin::CategoriesController < ApplicationController
 		def set_category
 			@category = Category.find(params[:id])
 		end
+
+		def check_login
+	  		if current_user.nil?
+	  			redirect_to signin_path, alert: "You have to sign in."
+	  		end
+	  	end
 end

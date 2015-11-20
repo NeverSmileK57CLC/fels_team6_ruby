@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
-	before_action :check_admin
+	before_action :check_login, except: :update
+	before_action :check_admin, except: :update
 	def index
 		@users = User.all
 	end
@@ -56,4 +57,10 @@ class Admin::UsersController < ApplicationController
 		def set_user
 			@user = User.find(params[:id])
 		end
+		
+		def check_login
+	  		if current_user.nil?
+	  			redirect_to signin_path, alert: "You have to sign in."
+	  		end
+	  	end
 end

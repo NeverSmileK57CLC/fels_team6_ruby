@@ -29,10 +29,7 @@ class WordsController < ApplicationController
           end
         end
       end
-      # learned_word_id = []
-      # learned_word.each do |l|
-      #   learned_word_id << l.word_id
-      # end
+
       if @filter[:learned] == '1'
         @words = @words.where("id IN (?)", learned_word)
       elsif @filter[:learned] == '2'
@@ -40,13 +37,8 @@ class WordsController < ApplicationController
       end
     end
 
-
   	@categories = Category.all
 
-    # word_answers = {}
-    # @words.each do |word|
-    #   word_answers["#{word.id}"] = word.word_answers.where(correct: true).first.content
-    # end
   	respond_to do |format|
   		format.html {}
   		format.json {render json: {words: @words.map{|word| word.json_data}}, status: :ok}

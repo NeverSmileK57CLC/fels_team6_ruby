@@ -1,0 +1,49 @@
+<div>
+	<div>
+	</div>
+	<div>
+	<% if @word.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@word.errors.count, "error") %> prohibited this user from being saved:</h2>
+          <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+    <% end %>
+	<%= form_for [:admin, @word] do |f| %>
+		<div class="form-group">
+			<%= f.label "Content", class: 'control-label' %><br>
+			<%= f.text_field :content, class: 'form-control', required: true %>
+		</div>
+		<div class="form-group">
+			<%= f.label "Category", class: 'control-label' %><br>
+			<select class="form-control" name="word[category_id]">
+			<% @categories.each do |category| %>
+				<option value="<%= category.id %>">
+				<%= category.name %>
+				</option>
+			<% end %>
+			</select>
+		</div>
+		<div class="form-group">
+			<%= f.label "Answers", class: 'control-label' %><br>
+			<%= f.fields_for :word_answers do |answer| %>
+			<div>
+				<%= answer.text_field :content, class: 'form-control', required: true %><br>
+			</div>
+			<% end %>
+			<%= f.label "Correct", class: 'control-label' %>
+			<select class="form-control" name="word[correct]">
+				<% 4.times.each do |n| %>
+					<option value="<%= n %>">Answer<%= n+1 %></option>
+				<% end %>
+			</select>
+		</div>
+		<div class="action">
+			<%= f.submit class: 'btn btn-primary' %>
+		</div>
+	<% end %>
+	</div>
+</div>

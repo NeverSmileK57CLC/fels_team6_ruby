@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :destroy]
+  before_action :check_login_to_register, only: [:new]
 
   def index
     @users = User.all
@@ -62,5 +63,11 @@ class UsersController < ApplicationController
 
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def check_login_to_register
+      if !current_user.nil?
+        redirect_to home_path, notice: "You already login"
+      end
     end
 end

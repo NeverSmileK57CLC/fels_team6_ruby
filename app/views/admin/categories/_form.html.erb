@@ -16,11 +16,11 @@
 	<%= form_for [:admin, @category] do |f| %>
 		<div class="form-group">
 			<%= f.label "Name", class: 'control-label' %><br>
-			<%= f.text_field :name, class: 'form-control' %>
+			<%= f.text_field :name, class: 'form-control', required: true %>
 		</div>
 		<div class="form-group">
 			<%= f.label "Description", class: 'control-label' %><br>
-			<%= f.text_area :description, class: 'form-control' %>
+			<%= f.text_area :description, class: 'form-control', required: true %>
 		</div>
 		<div class="action">
 			<%= f.submit class: 'btn btn-primary' %>

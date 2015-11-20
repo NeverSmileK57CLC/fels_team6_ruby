@@ -1,4 +1,6 @@
 <% if @p.nil? %>
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
 <%= form_for(@lesson, url: lesson_path(@lesson), method: :patch) do |f| %>
 <% @count = 0 %>
 <% @wordlessons.each do |w| %>
@@ -19,6 +21,8 @@
 	<%= f.submit "Submit", class: "btn btn-primary" %>
 </div>
 <% end %>
+</div>
+</div>
 <% else %>
 <% true_answer = 0 %>
 

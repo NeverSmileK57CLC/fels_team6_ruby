@@ -1,4 +1,5 @@
 <p id="alert"><%= alert %></p>
+<p id="notice"><%= notice %></p>
 <div class="row">
 	<div class="col-md-3 user-info-home">
 		<div class="row">
@@ -12,12 +13,12 @@
 		</div>
 	</div>
 	<div class="col-md-9">
-		<div>
+		<div class="word-lesson-button">
 		<%= link_to words_path do %>
-			<button class="btn btn-primary">Words</button>
+			<button class="btn btn-success">Words</button>
 		<% end %>
 		<%= link_to categories_path do %>
-			<button class="btn btn-primary">Lesson</button>
+			<button class="btn btn-success">Categories</button>
 		<% end %>
 		</div>
 		<h1>Activities</h1>

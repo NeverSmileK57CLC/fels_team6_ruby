@@ -3,12 +3,6 @@ class LessonsController < ApplicationController
     @lessons = Lesson.where(user_id: current_user.id)
   end
 
-  def new
-    # @questions.each do |ques|
-    #   Lesson
-    # end
-  end
-
   def create
     category_id = params[:lesson][:category_id].to_i
     @lesson = Lesson.new(user_id: current_user.id, category_id: category_id)

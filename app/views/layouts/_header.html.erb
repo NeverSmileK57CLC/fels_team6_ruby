@@ -13,6 +13,7 @@
         <% else %>
           <li><%= link_to "Words", words_path %></li>
           <li><%= link_to "Categories", categories_path %></li>
+          <li><%= link_to "Lessons", lessons_path %></li>
           <% if current_user.role == "Admin" %>
             <li><%= link_to "Admin", admin_users_path %></li>
           <% end %>

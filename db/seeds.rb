@@ -16,6 +16,7 @@ User.create(fullname: "Nguyen Huy Hoang", email: "hoangnh@gmail.com", password: 
 
 
 # Create category
+category = Category.create(name: "At the restaurent", description: "Food and Alcohol")
 category = Category.create(name: "Basic 500", description: "Abc")
 word1 = Word.create(category: category, content: "Word 1")
 WordAnswer.create(word: word1, content: "answer1", correct: true)
