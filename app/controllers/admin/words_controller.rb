@@ -24,4 +24,5 @@ class Admin::WordsController < ApplicationController
 
 		def set_word
 			params.require(:word).permit(:content, :category_id)
+		end
 end
