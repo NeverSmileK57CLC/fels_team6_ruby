@@ -69,12 +69,16 @@ class LessonsController < ApplicationController
     @count = 0
     # Tinh so ket qua dung true_answer
     true_answer = 0
+    result_detail = []
     @wordlessons.each do |w|
       @count += 1
       if !@p["wordanswer#{@count}"].nil?
         w.answer = WordAnswer.where(id: @p["wordanswer#{@count}"].to_i).first.content
         if w.answer == w.word.word_answers.where(correct: 1).first.content
           true_answer += 1
+          result_detail << [w.word.content, w.answer, true]
+        else
+          result_detail << [w.word.content, w.answer, false]
         end
       end
     end
@@ -86,7 +90,7 @@ class LessonsController < ApplicationController
     end
     respond_to do |format|
       format.html {render 'show'}
-      format.json {render json: {result: true_answer}}
+      format.json {render json: {result: true_answer, result_detail: result_detail}}
     end
   end
 end
