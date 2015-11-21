@@ -33,7 +33,7 @@ class WordsController < ApplicationController
       if @filter[:learned] == '1'
         @words = @words.where("id IN (?)", learned_word)
       elsif @filter[:learned] == '2'
-        @words = @words.where("id NOT IN (?)", learned_word)
+        @words = @words.where("id NOT IN (?)", learned_word) if learned_word.count != 0
       end
     end
 
