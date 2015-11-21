@@ -49,7 +49,7 @@ class LessonsController < ApplicationController
         format.json {render json: {questions: @questions.map {|question| question.json_data}, id: @lesson.id, status: "success"}, status: :ok}
       else
         format.html {redirect_to categories_path, alert: "Not enough word for you can learn."}
-        format.json {render json: {message: "Not enough word"}, status: :unprocessable_entity}
+        format.json {render json: {message: "Not enough word", status: "fail"}, status: :unprocessable_entity}
       end
     end
   end
@@ -89,7 +89,7 @@ class LessonsController < ApplicationController
       w.save
     end
     respond_to do |format|
-      format.html {render 'show'}
+      format.html {render 'new'}
       format.json {render json: {status: "success", result: true_answer, result_detail: result_detail}}
     end
   end
