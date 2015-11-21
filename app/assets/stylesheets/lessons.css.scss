@@ -28,6 +28,9 @@ table.list-lesson {
 	font-size: 20px;
 }
 .each-question {
+	.col-md-3 {
+		padding: 45px;
+	}
 	input[type="radio"] {
 		margin-right: 20px;
 	}

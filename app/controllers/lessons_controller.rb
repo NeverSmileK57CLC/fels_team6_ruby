@@ -46,7 +46,7 @@ class LessonsController < ApplicationController
           WordLesson.create(word: ques, lesson: @lesson)
         end
         format.html {redirect_to lesson_path(@lesson)}
-        format.json {render json: {questions: @questions.map {|question| question.json_data}, id: @lesson.id}, status: :ok}
+        format.json {render json: {questions: @questions.map {|question| question.json_data}, id: @lesson.id, status: "success"}, status: :ok}
       else
         format.html {redirect_to categories_path, alert: "Not enough word for you can learn."}
         format.json {render json: {message: "Not enough word"}, status: :unprocessable_entity}
@@ -90,7 +90,7 @@ class LessonsController < ApplicationController
     end
     respond_to do |format|
       format.html {render 'show'}
-      format.json {render json: {result: true_answer, result_detail: result_detail}}
+      format.json {render json: {status: "success", result: true_answer, result_detail: result_detail}}
     end
   end
 end
