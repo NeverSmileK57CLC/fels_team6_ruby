@@ -42,11 +42,12 @@ class LessonsController < ApplicationController
         while @questions.count < 10 do
           @questions << @words.sample
         end
+        @word_lessons = []
         @questions.each do |ques|
-          WordLesson.create(word: ques, lesson: @lesson)
+          @word_lessons << WordLesson.create(word: ques, lesson: @lesson)
         end
-        format.html {redirect_to lesson_path(@lesson)}
-        format.json {render json: {questions: @questions.map {|question| question.json_data}, id: @lesson.id, status: "success"}, status: :ok}
+        format.html {redirect_to edit_lesson_path(@lesson)}
+        format.json {render json: {word_lessons: @word_lessons.map {|word_lesson| word_lesson.json_data}, id: @lesson.id, status: "success"}, status: :ok}
       else
         format.html {redirect_to categories_path, alert: "Not enough word for you can learn."}
         format.json {render json: {message: "Not enough word", status: "fail"}, status: :unprocessable_entity}
@@ -59,38 +60,66 @@ class LessonsController < ApplicationController
     @wordlessons = WordLesson.where(lesson_id: @lesson.id)
   end
 
+  def edit
+    @lesson = Lesson.find params[:id]
+  end
+
   def update
-    @p = params
+    # @p = params
 
     @lesson = Lesson.find(params[:id])
-    @wordlessons = WordLesson.where(lesson_id: @lesson.id)
 
-    # Ghi ket qua user lam vao db
-    @count = 0
-    # Tinh so ket qua dung true_answer
+    @lesson.update_attributes lesson_params
     true_answer = 0
-    result_detail = []
-    @wordlessons.each do |w|
-      @count += 1
-      if !@p["wordanswer#{@count}"].nil?
-        w.answer = WordAnswer.where(id: @p["wordanswer#{@count}"].to_i).first.content
-        if w.answer == w.word.word_answers.where(correct: 1).first.content
-          true_answer += 1
-          result_detail << [w.word.content, w.answer, true]
-        else
-          result_detail << [w.word.content, w.answer, false]
-        end
+    @lesson.word_lessons.each do |word_lesson|
+      if word_lesson.word_answer and word_lesson.word_answer.correct?
+        true_answer += 1
       end
     end
-    # Ghi result vao lesson
-    @lesson.result = true_answer
-    @lesson.save
-    @wordlessons.each do |w|
-      w.save
-    end
+    params[:lesson][:result] = true_answer
     respond_to do |format|
-      format.html {render 'new'}
-      format.json {render json: {status: "success", result: true_answer, result_detail: result_detail}}
+      if @lesson.update_attributes lesson_params
+        format.html {redirect_to @lesson}
+        format.json {render json: {result: @lesson.result}, status: :ok}
+      else
+        format.html {render "edit"}
+        format.json {render json: {message: @lesson.errors.full_messages}, status: 401}
+      end
     end
+
+    # @wordlessons = WordLesson.where(lesson_id: @lesson.id)
+
+    # # Ghi ket qua user lam vao db
+    # @count = 0
+    # # Tinh so ket qua dung true_answer
+    # true_answer = 0
+    # result_detail = []
+    # @wordlessons.each do |w|
+    #   @count += 1
+    #   if !@p["wordanswer#{@count}"].nil?
+    #     w.answer = WordAnswer.where(id: @p["wordanswer#{@count}"].to_i).first.content
+    #     if w.answer == w.word.word_answers.where(correct: 1).first.content
+    #       true_answer += 1
+    #       result_detail << [w.word.content, w.answer, true]
+    #     else
+    #       result_detail << [w.word.content, w.answer, false]
+    #     end
+    #   end
+    # end
+    # # Ghi result vao lesson
+    # @lesson.result = true_answer
+    # @lesson.save
+    # @wordlessons.each do |w|
+    #   w.save
+    # end
+    # respond_to do |format|
+    #   format.html {render 'new'}
+    #   format.json {render json: {status: "success", result: true_answer, result_detail: result_detail}}
+    # end
+  end
+
+  private
+  def lesson_params
+    params.require(:lesson).permit(:result, word_lessons_attributes: [:id, :word_answer_id])
   end
 end

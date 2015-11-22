@@ -1,57 +1,25 @@
-
-<% if @p.nil? %>
-<div class="row">
-<div class="col-md-8 col-md-offset-2">
-<%= form_for(@lesson, url: lesson_path(@lesson), method: :patch) do |f| %>
-<% @count = 0 %>
-<% @wordlessons.each do |w| %>
-	<% @count += 1 %>
-	<div class="each-question">
-		<div class="col-md-3">
-		<%= Word.find(w.word_id).content %>
-		</div>
-		<div class="col-md-9">
-		<% @wordanswers = WordAnswer.where(word_id: w.word_id) %>
-		<% @wordanswers.each do |wa| %>
-			<input type="radio" name="wordanswer<%= @count %>" value="<%= wa.id %>"><%= wa.content %><br>
-		<% end %>
-		</div>
-	</div>
-<% end %>
-<div>
-	<%= f.submit "Submit", class: "btn btn-primary" %>
-</div>
-<% end %>
-</div>
-</div>
-<% else %>
-<% true_answer = 0 %>
-
 <p class="result-board"><%= @lesson.category.name %> Result: <%= @lesson.result %>/<%= @lesson.word_lessons.count %></p>
-<% @count = 0 %>
 <table class="table table-striped result-table">
 <tbody>
-	<% @wordlessons.each do |w| %>
-	<% @count += 1 %>
-	<tr>
-	<% if !@p["wordanswer#{@count}"].nil? %>
-		<% if w.answer == w.word.word_answers.where(correct: 1).first.content %>
-			<td><i class="fa fa-circle-o fa-2-5x true-answer"></i></td>
-		<% else %>
-			<td><i class="fa fa-times fa-2-5x wrong-answer"></i></td>
-		<% end %>
-		<td><%= w.word.content %></td>
-		<td><%= WordAnswer.where(id: @p["wordanswer#{@count}"]).first.content %></td>
-	<% else %>
-		<td><i class="fa fa-times fa-2-5x wrong-answer"></i></td>
-		<td><%= w.word.content %></td>
-		<td>Not Answer</td>
-	<% end %>
-	</tr>
-	<% end %>
+  <% @lesson.word_lessons.each do |word_lesson| %>
+    <tr>
+    <% if !word_lesson.word_answer.nil? %>
+      <% if word_lesson.word_answer.correct? %>
+        <td><i class="fa fa-circle-o fa-2-5x true-answer"></i></td>
+      <% else %>
+        <td><i class="fa fa-times fa-2-5x wrong-answer"></i></td>
+      <% end %>
+      <td><%= word_lesson.word.content %></td>
+      <td><%= word_lesson.word_answer.content %></td>
+    <% else %>
+      <td><i class="fa fa-times fa-2-5x wrong-answer"></i></td>
+      <td><%= word_lesson.word.content %></td>
+      <td>Not Answer</td>
+    <% end %>
+    </tr>
+  <% end %>
 </tbody>
 </table>
 <%= link_to lessons_path do %>
-	<button class="btn btn-primary">Back</button>
-<% end %>
+  <button class="btn btn-primary">Back</button>
 <% end %>

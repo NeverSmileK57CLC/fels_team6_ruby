@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+  p<%= @lesson.result %>p
+    <% @lesson.word_lessons.each do |word_lesson| %>
+      Word content: <%= word_lesson.word.content %>
+      <% if word_lesson.word_answer_id.nil? %>
+        <p>Don't choose it</p>
+      <% else %>
+        <p>
+          Answer: <%= word_lesson.word_answer.content %> - 
+          <%= word_lesson.word_answer.correct? ? "true" : "false" %>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+</div>

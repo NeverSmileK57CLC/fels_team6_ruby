@@ -1,0 +1,24 @@
+<div class="col-md-8 col-md-offset-2">
+  <%= form_for @lesson do |f| %>
+    <%= f.fields_for :word_lessons do |wl_builder| %>
+      <% word = wl_builder.object.word %>
+      <div class="each-question">
+        <div class="col-md-3">
+          <%= word.content %>
+        </div>
+        <div class="col-md-9">
+          <% word.word_answers.each do |answer| %>
+          <div class="row">
+            <%= wl_builder.label :word_answer_id, answer.content %>
+            <%= wl_builder.radio_button :word_answer_id, answer.id %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.submit "Submit", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

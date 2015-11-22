@@ -60,12 +60,14 @@ ActiveRecord::Schema.define(version: 20151116085453) do
   create_table "word_lessons", force: :cascade do |t|
     t.integer  "word_id"
     t.integer  "lesson_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "word_answer_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "answer"
   end
 
   add_index "word_lessons", ["lesson_id"], name: "index_word_lessons_on_lesson_id", using: :btree
+  add_index "word_lessons", ["word_answer_id"], name: "index_word_lessons_on_word_answer_id", using: :btree
   add_index "word_lessons", ["word_id"], name: "index_word_lessons_on_word_id", using: :btree
 
   create_table "words", force: :cascade do |t|
@@ -77,4 +79,11 @@ ActiveRecord::Schema.define(version: 20151116085453) do
 
   add_index "words", ["category_id"], name: "index_words_on_category_id", using: :btree
 
+  add_foreign_key "lessons", "categories"
+  add_foreign_key "lessons", "users"
+  add_foreign_key "word_answers", "words"
+  add_foreign_key "word_lessons", "lessons"
+  add_foreign_key "word_lessons", "word_answers"
+  add_foreign_key "word_lessons", "words"
+  add_foreign_key "words", "categories"
 end
