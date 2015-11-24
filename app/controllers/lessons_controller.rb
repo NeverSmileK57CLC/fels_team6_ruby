@@ -57,7 +57,6 @@ class LessonsController < ApplicationController
 
   def show
     @lesson = Lesson.find(params[:id])
-    @wordlessons = WordLesson.where(lesson_id: @lesson.id)
   end
 
   def edit

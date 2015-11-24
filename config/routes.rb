@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :words
     resources :users
     resources :categories
+    resources :lessons
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

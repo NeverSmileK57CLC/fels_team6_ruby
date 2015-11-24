@@ -1,0 +1,32 @@
+<div>
+	<%= render 'admin/head' %>
+	<p id="notice"><%= notice %></p>
+	<table class="table table-striped table-hover admin-table">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>User ID</th>
+				<th>Category</th>
+				<th>Result</th>
+				<th>Opeations</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @lessons.each do |lesson| %>
+			<tr>
+				<td><%= lesson.id %></td>
+				<td><%= lesson.user.id %></td>
+				<td><%= lesson.category.name %></td>
+				<td><%= lesson.result || 0 %></td>
+				<td>
+					<%= link_to admin_lesson_path(lesson) do %>
+						<i class="operations fa fa-eye fa-2x"></i>
+					<% end %>
+					<%= link_to(admin_lesson_path(lesson), method: :delete, data: {confirm: "Are you sure?"}) do %>
+						<i class="operations fa fa-trash fa-2x"></i></a>
+					<% end %>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>

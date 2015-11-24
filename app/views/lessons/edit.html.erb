@@ -9,8 +9,8 @@
         <div class="col-md-9">
           <% word.word_answers.each do |answer| %>
           <div class="row">
-            <%= wl_builder.label :word_answer_id, answer.content %>
-            <%= wl_builder.radio_button :word_answer_id, answer.id %>
+            <%= wl_builder.label :word_answer_id, answer.content, class: 'answer' %>
+            <%= wl_builder.radio_button :word_answer_id, answer.id, class: 'answer-radio' %>
           </div>
           <% end %>
         </div>

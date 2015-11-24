@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  before_action :check_signin
   def new
   	@title = "Sign in"
   end
@@ -21,5 +22,11 @@ class SessionsController < ApplicationController
   def destroy
   	sign_out
   	redirect_to signin_path, notice: "Sign out successfull."
+  end
+
+  def check_signin
+    if signed_in?
+      redirect_to home_path
+    end
   end
 end
