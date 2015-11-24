@@ -64,8 +64,6 @@ class LessonsController < ApplicationController
   end
 
   def update
-    # @p = params
-
     @lesson = Lesson.find(params[:id])
 
     @lesson.update_attributes lesson_params
@@ -85,36 +83,6 @@ class LessonsController < ApplicationController
         format.json {render json: {message: @lesson.errors.full_messages}, status: 401}
       end
     end
-
-    # @wordlessons = WordLesson.where(lesson_id: @lesson.id)
-
-    # # Ghi ket qua user lam vao db
-    # @count = 0
-    # # Tinh so ket qua dung true_answer
-    # true_answer = 0
-    # result_detail = []
-    # @wordlessons.each do |w|
-    #   @count += 1
-    #   if !@p["wordanswer#{@count}"].nil?
-    #     w.answer = WordAnswer.where(id: @p["wordanswer#{@count}"].to_i).first.content
-    #     if w.answer == w.word.word_answers.where(correct: 1).first.content
-    #       true_answer += 1
-    #       result_detail << [w.word.content, w.answer, true]
-    #     else
-    #       result_detail << [w.word.content, w.answer, false]
-    #     end
-    #   end
-    # end
-    # # Ghi result vao lesson
-    # @lesson.result = true_answer
-    # @lesson.save
-    # @wordlessons.each do |w|
-    #   w.save
-    # end
-    # respond_to do |format|
-    #   format.html {render 'new'}
-    #   format.json {render json: {status: "success", result: true_answer, result_detail: result_detail}}
-    # end
   end
 
   private

@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :check_signin
+  before_action :check_signin, except: [:destroy]
   def new
   	@title = "Sign in"
   end
